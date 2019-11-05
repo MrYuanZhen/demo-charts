@@ -1,0 +1,22 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: eureka-demo
+spec:
+  selector:
+    matchLabels:
+      app: eureka-demo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: eureka-demo
+    spec:
+      containers:
+        - name: eureka-demo
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8761
+              protocol: TCP

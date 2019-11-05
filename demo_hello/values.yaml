@@ -1,0 +1,14 @@
+image:
+  repository: zz535875999/spring-hello
+  tag: v1.0
+  pullPolicy: IfNotPresent
+
+service:
+  nodePort: "30012"
+
+eureka:
+  eureka_url: "127.0.0.1"
+  eureka_port: "8761"
+
+app:
+  demo_port: "8080"

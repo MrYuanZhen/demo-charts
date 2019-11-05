@@ -1,0 +1,27 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: eureka-hello
+spec:
+  selector:
+    matchLabels:
+      app: eureka-hello
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: eureka-hello
+    spec:
+      containers:
+      - env:
+        - name: eureka
+          value: {{ .Values.eureka.eureka_url }}:{{ .Values.eureka.eureka_port }}
+        - name: port
+          value: "{{ .Values.app.demo_port}}"
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: Always
+        name: eureka-hello
+        ports:
+        - name: tcp
+          containerPort: 8080
+          protocol: TCP
